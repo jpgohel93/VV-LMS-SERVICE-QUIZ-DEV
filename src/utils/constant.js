@@ -1,0 +1,5 @@
+module.exports = {
+    SUCCESS_RESPONSE: 200,
+    ERROR_RESPONSE: 400,
+    DATABASE_ERROR_RESPONSE: 500,
+};
