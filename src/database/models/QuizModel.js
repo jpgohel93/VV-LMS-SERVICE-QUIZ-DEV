@@ -96,7 +96,7 @@ const fatchQuizList = async (search,start, limit,publisher_id) => {
         }
     }
 
-    const quizData = await QuizSchema.find(conditions).skip(start).limit(limit).then((data) => {
+    const quizData = await QuizSchema.find(conditions,{_id: 1, title: 1, description: 1}).skip(start).limit(limit).then((data) => {
         return data
     }).catch((err) => {
         return null
