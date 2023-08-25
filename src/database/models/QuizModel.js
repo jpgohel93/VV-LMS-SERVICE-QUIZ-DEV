@@ -46,13 +46,13 @@ const fatchQuizs = async (search,publisher_id) => {
         }
     ];
 
-    if(publisher_id !== '' && publisher_id !== undefined && publisher_id !== 0){
+    if(publisher_id){
         searchFilter.push({
             publisher_id: publisher_id
         })
     }
 
-    if(search !== ''){
+    if(search){
         searchFilter.push({
             title: { $regex: '.*' + search + '.*',$options:'i' }
         })
@@ -73,13 +73,13 @@ const fatchQuizList = async (search,start, limit,publisher_id) => {
 
     let searchFilter = [];
 
-    if(publisher_id !== '' && publisher_id !== undefined && publisher_id !== 0){
+    if(publisher_id){
         searchFilter.push({
             publisher_id: publisher_id
         })
     }
 
-    if(search !== ''){
+    if(search){
         searchFilter.push({
             title: { $regex: '.*' + search + '.*',$options:'i' }
         })
@@ -112,13 +112,13 @@ const countQuiz = async (search,publisher_id) => {
         }
     ];
 
-    if(publisher_id !== '' && publisher_id !== undefined && publisher_id !== 0){
+    if(publisher_id){
         searchFilter.push({
             publisher_id: publisher_id
         })
     }
 
-    if(search !== ''){
+    if(search){
         searchFilter.push({
             title: { $regex: '.*' + search + '.*',$options:'i' }
         })

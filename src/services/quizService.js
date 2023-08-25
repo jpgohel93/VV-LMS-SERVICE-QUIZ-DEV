@@ -504,7 +504,7 @@ const changeQuestionPostion= async (userInput, request) => {
     return {
         status: true,
         status_code: constants.SUCCESS_RESPONSE,
-        message: "Question position chnaged successfully",
+        message: "Question position changed successfully",
     };
 }
 
