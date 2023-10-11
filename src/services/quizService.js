@@ -332,7 +332,7 @@ const getQuizById = async (userInputs, req) => {
 
 const updateQuizSetting = async (userInput, request) => {
     try{
-        const { id, is_limit_attempts, limit_attempt, is_time_limit, time_limit,is_question_time_limit, question_time_limit, passing_type, passing_points, passing_questions,passing_percentage } = userInput;
+        const { id, is_limit_attempts, limit_attempt, is_time_limit, time_limit,is_question_time_limit, question_time_limit, passing_type, passing_points, passing_questions,passing_percentage,  question_point, negative_point } = userInput;
         
         const createQuiz = await QuizModel.updateQuiz(id, { 
             is_limit_attempts: is_limit_attempts, 
@@ -344,11 +344,13 @@ const updateQuizSetting = async (userInput, request) => {
             passing_type: passing_type, 
             passing_points: passing_points,
             passing_questions: passing_questions,
-            passing_percentage: passing_percentage
+            passing_percentage: passing_percentage,
+            question_point: question_point,
+            negative_point: negative_point
         });
 
         if(createQuiz !== false){
-            CallQuizEvent("update_quiz_setting",{ id, is_limit_attempts, limit_attempt, is_time_limit, time_limit,is_question_time_limit, question_time_limit, passing_type, passing_points, passing_questions,passing_percentage }, request.get("Authorization"));
+            CallQuizEvent("update_quiz_setting",{ id, is_limit_attempts, limit_attempt, is_time_limit, time_limit,is_question_time_limit, question_time_limit, passing_type, passing_points, passing_questions,passing_percentage,  question_point, negative_point }, request.get("Authorization"));
 
             return {
                 status: true,

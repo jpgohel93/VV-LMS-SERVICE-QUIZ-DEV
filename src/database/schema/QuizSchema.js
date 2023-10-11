@@ -24,6 +24,14 @@ const QuizSchema = new Schema({
     passing_points: Number,
     passing_questions: Number, // Passed by question means when student entered 5 right answer to passed quiz
     passing_percentage: Number, // Passed by question means when student entered 50% right answers to passed quiz
+    question_point:  {
+        type: Number,
+        default: 1
+    },
+    negative_point: {
+        type: Number,
+        default: 0
+    },
     questions: [{
         question: String,
         question_type: Number, // 1. multiple Answer, 2. true/false, 3. single Answer

@@ -55,8 +55,8 @@ module.exports = async (app) => {
 
 	app.post('/quiz/quizsetting', UserAuth, async (req, res, next) => {
 
-		const { id, is_limit_attempts, limit_attempt, is_time_limit, time_limit, is_question_time_limit, question_time_limit, passing_type, passing_points, passing_questions, passing_percentage } = req.body;
-		const data = await quizService.updateQuizSetting({ id, is_limit_attempts, limit_attempt, is_time_limit, time_limit, is_question_time_limit, question_time_limit, passing_type, passing_points, passing_questions, passing_percentage }, req);
+		const { id, is_limit_attempts, limit_attempt, is_time_limit, time_limit, is_question_time_limit, question_time_limit, passing_type, passing_points, passing_questions, passing_percentage, question_point, negative_point } = req.body;
+		const data = await quizService.updateQuizSetting({ id, is_limit_attempts, limit_attempt, is_time_limit, time_limit, is_question_time_limit, question_time_limit, passing_type, passing_points, passing_questions, passing_percentage,  question_point, negative_point }, req);
 
 		res.status(data.status_code).json(data);
 	});
