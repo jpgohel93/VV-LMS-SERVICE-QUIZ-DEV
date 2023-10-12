@@ -34,7 +34,6 @@ const QuizSchema = new Schema({
     },
     questions: [{
         question: String,
-        question_type: Number, // 1. multiple Answer, 2. true/false, 3. single Answer
         image: String,
         thumbnail_image: String,
         options:[{

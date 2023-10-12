@@ -63,8 +63,8 @@ module.exports = async (app) => {
 
 	app.post('/quiz/addquizquestion', UserAuth, async (req, res, next) => {
 
-		const { id, question, question_type, image, options, tags, points, explanation, thumbnail_image } = req.body;
-		const data = await quizService.addQuizQuestion({ id, question, question_type, image, options, tags, points, explanation, thumbnail_image }, req);
+		const { id, question, image, options, tags, points, explanation, thumbnail_image } = req.body;
+		const data = await quizService.addQuizQuestion({ id, question, image, options, tags, points, explanation, thumbnail_image }, req);
 
 		res.status(data.status_code).json(data);
 	});
@@ -94,8 +94,8 @@ module.exports = async (app) => {
 
 	app.post('/quiz/updatequizquestion', UserAuth, async (req, res, next) => {
 
-		const { questions_id, question, question_type, image, options, tags, points, explanation, thumbnail_image } = req.body;
-		const data = await quizService.updateQuizQuestion({ questions_id, question, question_type, image, options, tags, points, explanation, thumbnail_image }, req);
+		const { questions_id, question, image, options, tags, points, explanation, thumbnail_image } = req.body;
+		const data = await quizService.updateQuizQuestion({ questions_id, question, image, options, tags, points, explanation, thumbnail_image }, req);
 
 		res.status(data.status_code).json(data);
 	});

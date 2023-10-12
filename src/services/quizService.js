@@ -381,11 +381,10 @@ const updateQuizSetting = async (userInput, request) => {
 
 const addQuizQuestion= async (userInput, request) => {
     try{
-        const { id, question, question_type, image, options,tags, points, explanation, thumbnail_image } = userInput;
+        const { id, question, image, options,tags, points, explanation, thumbnail_image } = userInput;
         
         const createQuiz = await QuizModel.createQuestion(id, { 
             question: question, 
-            question_type: question_type, 
             image: image, 
             options: options,
             tags: tags, 
@@ -412,7 +411,7 @@ const addQuizQuestion= async (userInput, request) => {
                 }
             }
 
-            CallQuizEvent("add_quiz_question",{ id,questions_id:questionId, question, question_type, image, options,tags, points, explanation, thumbnail_image }, request.get("Authorization"));
+            CallQuizEvent("add_quiz_question",{ id,questions_id:questionId, question, image, options,tags, points, explanation, thumbnail_image }, request.get("Authorization"));
 
             return {
                 status: true,
@@ -443,11 +442,10 @@ const addQuizQuestion= async (userInput, request) => {
 
 const updateQuizQuestion= async (userInput, request) => {
     try{
-        const { questions_id, question, question_type, image, options,tags, points, explanation, thumbnail_image } = userInput;
+        const { questions_id, question, image, options,tags, points, explanation, thumbnail_image } = userInput;
         
         const createQuiz = await QuizModel.updateQuestion(questions_id, { 
             "questions.$.question": question, 
-            "questions.$.question_type": question_type, 
             "questions.$.image": image, 
             "questions.$.options": options,
             "questions.$.tags": tags, 
@@ -472,7 +470,7 @@ const updateQuizQuestion= async (userInput, request) => {
                 }
             }
 
-            CallQuizEvent("update_quiz_question",{ questions_id:questions_id, question, question_type, image, options,tags, points, explanation, thumbnail_image }, request.get("Authorization"));
+            CallQuizEvent("update_quiz_question",{ questions_id:questions_id, question, image, options,tags, points, explanation, thumbnail_image }, request.get("Authorization"));
 
             return {
                 status: true,
