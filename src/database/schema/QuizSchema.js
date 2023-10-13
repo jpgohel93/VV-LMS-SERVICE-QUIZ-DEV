@@ -41,6 +41,10 @@ const QuizSchema = new Schema({
             image_file: String,
             is_correct_answer: Boolean
         }],
+        question_level: {
+            type: Number,
+            default: 1
+        }, // 1. Easy, 2. Medium, 3. Heard
         tags: [String],
         points: Number,
         explanation: String,

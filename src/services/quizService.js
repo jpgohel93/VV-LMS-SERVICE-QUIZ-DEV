@@ -381,7 +381,7 @@ const updateQuizSetting = async (userInput, request) => {
 
 const addQuizQuestion= async (userInput, request) => {
     try{
-        const { id, question, image, options,tags, points, explanation, thumbnail_image } = userInput;
+        const { id, question, image, options,tags, points, explanation, thumbnail_image, question_level } = userInput;
         
         const createQuiz = await QuizModel.createQuestion(id, { 
             question: question, 
@@ -391,7 +391,8 @@ const addQuizQuestion= async (userInput, request) => {
             points: points, 
             explanation: explanation,
             short_order: 1,
-            thumbnail_image: thumbnail_image
+            thumbnail_image: thumbnail_image,
+            question_level: question_level
         });
 
         if(createQuiz !== false){
@@ -411,7 +412,7 @@ const addQuizQuestion= async (userInput, request) => {
                 }
             }
 
-            CallQuizEvent("add_quiz_question",{ id,questions_id:questionId, question, image, options,tags, points, explanation, thumbnail_image }, request.get("Authorization"));
+            CallQuizEvent("add_quiz_question",{ id,questions_id:questionId, question, image, options,tags, points, explanation, thumbnail_image, question_level }, request.get("Authorization"));
 
             return {
                 status: true,
@@ -442,7 +443,7 @@ const addQuizQuestion= async (userInput, request) => {
 
 const updateQuizQuestion= async (userInput, request) => {
     try{
-        const { questions_id, question, image, options,tags, points, explanation, thumbnail_image } = userInput;
+        const { questions_id, question, image, options,tags, points, explanation, thumbnail_image, question_level } = userInput;
         
         const createQuiz = await QuizModel.updateQuestion(questions_id, { 
             "questions.$.question": question, 
@@ -451,7 +452,9 @@ const updateQuizQuestion= async (userInput, request) => {
             "questions.$.tags": tags, 
             "questions.$.points": points, 
             "questions.$.explanation": explanation,
-            "questions.$.thumbnail_image": thumbnail_image
+            "questions.$.thumbnail_image": thumbnail_image,
+            "questions.$.question_level": question_level
+            
         });
 
         if(createQuiz !== false){
@@ -470,7 +473,7 @@ const updateQuizQuestion= async (userInput, request) => {
                 }
             }
 
-            CallQuizEvent("update_quiz_question",{ questions_id:questions_id, question, image, options,tags, points, explanation, thumbnail_image }, request.get("Authorization"));
+            CallQuizEvent("update_quiz_question",{ questions_id:questions_id, question, image, options,tags, points, explanation, thumbnail_image, question_level }, request.get("Authorization"));
 
             return {
                 status: true,
