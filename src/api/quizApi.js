@@ -83,7 +83,7 @@ module.exports = async (app) => {
 
 		const { file_name } = req.body;
 
-		if(file_name !== undefined && file_name !== null && file_name !== ''){
+		if(file_name){
 			await deleteFile(file_name)
 		}
 
