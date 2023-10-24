@@ -681,6 +681,32 @@ const quizDropdown = async (userInputs) => {
     }
 }
 
+const replaceText = async (userInputs) => {
+    try{
+        const { quiz_id } = userInputs;
+
+        let question = " 1). sdsfdsdf sdf sdfs fsdfs  s sfsdfs sf fds sfd sf sdf ssf"
+
+        question = question.substring(question.indexOf(').')+1);
+
+        return {
+            status: true,
+            status_code: constants.SUCCESS_RESPONSE,
+            question: question
+        };
+    }catch (error) {
+        // Handle unexpected errors
+        console.error('Error in quizDropdown:', error);
+        return {
+            status: false,
+            status_code: constants.EXCEPTION_ERROR_CODE,
+            message: 'Failed to fetch quiz data',
+            error: { server_error: 'An unexpected error occurred' },
+            data: null,
+        };
+    }
+}
+
 
 module.exports = { 
     getRelatedToTags,
@@ -694,5 +720,6 @@ module.exports = {
     changeQuestionPostion,
     getQuizList,
     getQuizById,
-    quizDropdown
+    quizDropdown,
+    replaceText
 }

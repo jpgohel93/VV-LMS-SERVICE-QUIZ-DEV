@@ -134,4 +134,13 @@ module.exports = async (app) => {
         res.status(data.status_code).json(data);
     });
 
+	app.post('/quiz/replaceText',async (req,res,next) => {
+
+        const { quiz_id } = req.body;
+
+        const data = await quizService.replaceText({quiz_id}); 
+
+        res.status(data.status_code).json(data);
+    });
+
 } 
