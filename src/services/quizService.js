@@ -443,7 +443,7 @@ const addQuizQuestion= async (userInput, request) => {
 
 const updateQuizQuestion= async (userInput, request) => {
     try{
-        const { questions_id, question, image, options,tags, points, explanation, thumbnail_image, question_level } = userInput;
+        let { questions_id, question, image, options,tags, points, explanation, thumbnail_image, question_level } = userInput;
         
         const createQuiz = await QuizModel.updateQuestion(questions_id, { 
             "questions.$.question": question, 
