@@ -141,7 +141,7 @@ const updateQuiz = async (userInput, request) => {
         if(banner){
             updateData['banner'] = banner
 
-            if(getQuizData !== null &&  getQuizData?.banner){
+            if(getQuizData && getQuizData?.banner){
                 let filePath =  getQuizData.banner; 
                 await deleteFile(filePath);
             }
@@ -152,7 +152,7 @@ const updateQuiz = async (userInput, request) => {
         if(thumbnail_image){
             updateData['thumbnail_image'] = thumbnail_image
 
-            if(getQuizData !== null &&  getQuizData?.thumbnail_image){
+            if(getQuizData  &&  getQuizData?.thumbnail_image){
                 let filePath =  getQuizData.thumbnail_image; 
                 await deleteFile(filePath);
             }
@@ -219,7 +219,7 @@ const getQuizList = async (userInputs) => {
         const getQuizData = await QuizModel.fatchQuizList(search, page, perPage, publisher_id);
         const getQuizCount = await QuizModel.countQuiz(search, publisher_id);
         
-        if(getQuizData !== null){
+        if(getQuizData){
             return {
                 status: true,
                 status_code: constants.SUCCESS_RESPONSE,
@@ -229,8 +229,8 @@ const getQuizList = async (userInputs) => {
             };
         }else{
             return {
-                status: false,
-                status_code: constants.DATABASE_ERROR_RESPONSE,
+                status: true,
+                status_code: constants.SUCCESS_RESPONSE,
                 message: "Data not found",
                 data: null,
                 record_count: 0
@@ -255,7 +255,7 @@ const getQuizById = async (userInputs, req) => {
 
         const getQuizData = await QuizModel.fatchQuizById(quiz_id);
         
-        if(getQuizData !== null){
+        if(getQuizData){
 
             let categoryId = getQuizData.category_id
             if(categoryId && categoryId.length > 0){
@@ -310,8 +310,8 @@ const getQuizById = async (userInputs, req) => {
             };
         }else{
             return {
-                status: false,
-                status_code: constants.DATABASE_ERROR_RESPONSE,
+                status: true,
+                status_code: constants.SUCCESS_RESPONSE,
                 message: "Data not found",
                 data: null
             };
@@ -506,22 +506,22 @@ const deleteQuiz = async (userInput, request) => {
 
         const getQuizData = await QuizModel.fatchQuizById(quiz_id);
         
-        if(getQuizData !== null &&  getQuizData?.banner){
+        if(getQuizData &&  getQuizData?.banner){
             let filePath =  getQuizData.banner; 
             await deleteFile(filePath);
         }
-        if(getQuizData !== null &&  getQuizData?.thumbnail_image){
+        if(getQuizData &&  getQuizData?.thumbnail_image){
             let filePath =  getQuizData.thumbnail_image; 
             await deleteFile(filePath);
         }
         
-        if(getQuizData !== null && getQuizData?.questions?.length > 0){
+        if(getQuizData && getQuizData?.questions?.length > 0){
             let questionsArray =  getQuizData.questions; 
 
             let imageList = []
             await Promise.all(
                 await questionsArray.map(async (element, key) => {
-                    if(element.image !== undefined && element.image !== '' && element.image !== null){
+                    if(element?.image){
                         imageList[key] = element.image
                     }   
                 })
@@ -571,10 +571,10 @@ const deleteQuestion= async (userInput, request) => {
         //delete question image
         const questionData = await QuizModel.getSingleQuestion(question_id)
 
-        if(questionData !== null && questionData.length > 0){
+        if(questionData && questionData?.length > 0){
             let file =  questionData[0].questions.image; 
             
-            if(file !== undefined && file !== null && file !== ''){
+            if(file){
                 await deleteFile(file);
             }
         }
@@ -653,7 +653,7 @@ const quizDropdown = async (userInputs) => {
 
         let getQuizList = await QuizModel.getQuizList({ page , perPage, publisher_id, search });
 
-        if(getQuizList !== null){
+        if(getQuizList){
             return {
                 status: true,
                 status_code: constants.SUCCESS_RESPONSE,
@@ -662,8 +662,8 @@ const quizDropdown = async (userInputs) => {
             };
         }else{
             return {
-                status: false,
-                status_code: constants.DATABASE_ERROR_RESPONSE,
+                status: true,
+                status_code: constants.SUCCESS_RESPONSE,
                 message: "Data not found",
                 data: null
             };
