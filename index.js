@@ -11,8 +11,8 @@ const app = express();
 
 const { databaseConnection } = require('./src/database');
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json({ limit: '10mb' }));
+app.use(bodyParser.urlencoded({extended: false, limit: '10mb' }));
 
 app.use(cors());
 
